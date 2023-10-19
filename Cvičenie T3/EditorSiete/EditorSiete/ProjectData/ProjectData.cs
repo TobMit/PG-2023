@@ -1,9 +1,12 @@
 ﻿using EditorSiete.GraphicalObjects;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace EditorSiete.ProjectData
 {
@@ -86,5 +89,30 @@ namespace EditorSiete.ProjectData
             }
         }
 
+        public static void SaveData() 
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Title = "SaveNodes";
+            saveFileDialog1.Filter = "XML Files|*.xml";
+            saveFileDialog1.ShowDialog();
+            List<NetworkNode> networkNodes = new(Nodes);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<NetworkNode>)) ;
+
+            TextWriter writer = new StreamWriter(saveFileDialog1.OpenFile());
+            serializer.Serialize(writer, networkNodes);
+            writer.Close();
+        }
+
+        public static void OpenData()
+        {
+            OpenFileDialog openData = new OpenFileDialog();
+            openData.Title = "OpenNodes";
+            openData.ShowDialog();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<NetworkNode>));
+            using var reader = XmlReader.Create(openData.OpenFile());
+            Nodes.AddRange((List<NetworkNode>)serializer.Deserialize(reader));
+
+        }
     }
 }

@@ -69,7 +69,8 @@ namespace EditorSiete
                         ProjectData.ProjectData.SelectNode(node);
                         propertyGrid1.SelectedObject = tmp;
                     }
-                } else if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge)
+                }
+                else if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge)
                 {
                     NetworkNode? node = ProjectData.ProjectData.isNodeHitByMouse(e.Location);
                     if (node != null)
@@ -133,11 +134,11 @@ namespace EditorSiete
             }
             if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge && ProjectData.ProjectData.activeNode != null)
             {
-                
+
             }
 
             doubleBufferedPanelDrawing.Invalidate();
-            
+
         }
 
         private void doubleBufferedPanelDrawing_MouseUp(object sender, MouseEventArgs e)
@@ -151,7 +152,7 @@ namespace EditorSiete
                 }
             }
 
-                ProjectData.ProjectData.editorState = ProjectData.EditorState.None;
+            ProjectData.ProjectData.editorState = ProjectData.EditorState.None;
         }
 
         private void nodes_CheckedChanged(object sender, EventArgs e)
@@ -164,6 +165,16 @@ namespace EditorSiete
         {
             ProjectData.ProjectData.Mode = EditorMode.EditingEdge;
             ProjectData.ProjectData.SelectNode(null);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectData.ProjectData.SaveData();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectData.ProjectData.OpenData();
         }
     }
 }

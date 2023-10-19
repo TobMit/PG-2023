@@ -46,6 +46,15 @@ namespace EditorSiete.GraphicalObjects
                 boundingRectangle = new(position.X - (int)(size.X / 2.0), position.Y - (int)(size.Y / 2.0), size.X, size.Y);
             } 
         }
+
+
+        public NetworkNode()
+        {
+            Name = "Node";
+            size = new(20, 20);
+            Position = default;
+        }
+
         public NetworkNode(Point position)
         {
             Name = "Node";

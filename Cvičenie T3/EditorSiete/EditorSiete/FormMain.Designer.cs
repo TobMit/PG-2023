@@ -58,7 +58,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(11, 4, 0, 4);
-            menuStrip1.Size = new Size(2210, 44);
+            menuStrip1.Size = new Size(2210, 46);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -66,37 +66,39 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newProjectToolStripMenuItem, openToolStripMenuItem, closeToolStripMenuItem, saveToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 36);
+            fileToolStripMenuItem.Size = new Size(71, 38);
             fileToolStripMenuItem.Text = "File";
             // 
             // newProjectToolStripMenuItem
             // 
             newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            newProjectToolStripMenuItem.Size = new Size(206, 44);
+            newProjectToolStripMenuItem.Size = new Size(359, 44);
             newProjectToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(206, 44);
+            openToolStripMenuItem.Size = new Size(359, 44);
             openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(206, 44);
+            closeToolStripMenuItem.Size = new Size(359, 44);
             closeToolStripMenuItem.Text = "Close";
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(206, 44);
+            saveToolStripMenuItem.Size = new Size(359, 44);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(206, 44);
+            exitToolStripMenuItem.Size = new Size(359, 44);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -104,7 +106,7 @@
             // 
             projectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadeImmageToolStripMenuItem });
             projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            projectToolStripMenuItem.Size = new Size(107, 36);
+            projectToolStripMenuItem.Size = new Size(107, 38);
             projectToolStripMenuItem.Text = "Project";
             // 
             // loadeImmageToolStripMenuItem
@@ -120,10 +122,10 @@
             panelTools.Controls.Add(panelPropertyGrid);
             panelTools.Controls.Add(checkBoxBackgroundVisible);
             panelTools.Dock = DockStyle.Left;
-            panelTools.Location = new Point(0, 44);
+            panelTools.Location = new Point(0, 46);
             panelTools.Margin = new Padding(6);
             panelTools.Name = "panelTools";
-            panelTools.Size = new Size(371, 1417);
+            panelTools.Size = new Size(371, 1415);
             panelTools.TabIndex = 1;
             // 
             // groupBox1
@@ -165,7 +167,7 @@
             // 
             panelPropertyGrid.Controls.Add(propertyGrid1);
             panelPropertyGrid.Dock = DockStyle.Bottom;
-            panelPropertyGrid.Location = new Point(0, 605);
+            panelPropertyGrid.Location = new Point(0, 603);
             panelPropertyGrid.Name = "panelPropertyGrid";
             panelPropertyGrid.Size = new Size(371, 812);
             panelPropertyGrid.TabIndex = 1;
@@ -195,10 +197,10 @@
             // 
             doubleBufferedPanelDrawing.BackColor = Color.White;
             doubleBufferedPanelDrawing.Dock = DockStyle.Fill;
-            doubleBufferedPanelDrawing.Location = new Point(371, 44);
+            doubleBufferedPanelDrawing.Location = new Point(371, 46);
             doubleBufferedPanelDrawing.Margin = new Padding(6);
             doubleBufferedPanelDrawing.Name = "doubleBufferedPanelDrawing";
-            doubleBufferedPanelDrawing.Size = new Size(1839, 1417);
+            doubleBufferedPanelDrawing.Size = new Size(1839, 1415);
             doubleBufferedPanelDrawing.TabIndex = 2;
             doubleBufferedPanelDrawing.Paint += doubleBufferedPanelDrawing_Paint;
             doubleBufferedPanelDrawing.MouseDown += doubleBufferedPanelDrawing_MouseDown;
