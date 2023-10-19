@@ -11,7 +11,14 @@ namespace EditorSiete.ProjectData
     public enum EditorState
     {
         None,
-        StartDragging,
+        Dragging,
+        AddingEdge
+    }
+
+    public enum EditorMode
+    {
+        EditingNode,
+        EditingEdge
     }
 
     public static class ProjectData
@@ -20,8 +27,12 @@ namespace EditorSiete.ProjectData
         public static string BitmapPath;
         public static Bitmap Bitmap;
         public static List<NetworkNode> Nodes = new();
+        public static List<NetworkEdge> Edges = new();
         public static EditorState editorState { get; set; }
         public static NetworkNode? selectedNode;
+        public static NetworkNode? activeNode;
+        public static EditorMode Mode = EditorMode.EditingNode;
+        public static Point CurrentMousePosition;
 
         public static bool LoadBitmap()
         {

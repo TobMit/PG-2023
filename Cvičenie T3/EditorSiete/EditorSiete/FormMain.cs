@@ -29,29 +29,54 @@ namespace EditorSiete
             if (ProjectData.ProjectData.BacgroundVisible && ProjectData.ProjectData.Bitmap != null)
                 g.DrawImage(ProjectData.ProjectData.Bitmap, 0, 0);
 
+            // vykreslenie vešetkých hrán siete
+            foreach (NetworkEdge node in ProjectData.ProjectData.Edges)
+                node.Draw(e.Graphics);
+
             // vykreslenie vsetkych uzlov siete
             foreach (NetworkNode node in ProjectData.ProjectData.Nodes)
                 node.Draw(e.Graphics);
+
+            if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge
+                && ProjectData.ProjectData.editorState == EditorState.AddingEdge
+                && ProjectData.ProjectData.activeNode != null)
+            {
+                float[] dashValues = { 5, 2, 5, 2 };
+                using Pen blackPen = new Pen(Color.Black, 5);
+                blackPen.DashPattern = dashValues;
+                e.Graphics.DrawLine(blackPen, ProjectData.ProjectData.activeNode.Position, ProjectData.ProjectData.CurrentMousePosition);
+            }
         }
 
         private void doubleBufferedPanelDrawing_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                // zistime či sme klikli na nejaký point
-                NetworkNode? node = ProjectData.ProjectData.isNodeHitByMouse(e.Location);
-                if (node != null)
+                if (ProjectData.ProjectData.Mode == EditorMode.EditingNode)
                 {
-                    ProjectData.ProjectData.SelectNode(node);
-                    propertyGrid1.SelectedObject = node;
-                    ProjectData.ProjectData.editorState = EditorState.StartDragging;
-                }
-                else
+                    // zistime či sme klikli na nejaký point
+                    NetworkNode? node = ProjectData.ProjectData.isNodeHitByMouse(e.Location);
+                    if (node != null)
+                    {
+                        ProjectData.ProjectData.SelectNode(node);
+                        propertyGrid1.SelectedObject = node;
+                        ProjectData.ProjectData.editorState = EditorState.Dragging;
+                    }
+                    else
+                    {
+                        NetworkNode tmp = new(e.Location);
+                        ProjectData.ProjectData.Nodes.Add(tmp);
+                        ProjectData.ProjectData.SelectNode(node);
+                        propertyGrid1.SelectedObject = tmp;
+                    }
+                } else if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge)
                 {
-                    NetworkNode tmp = new(e.Location);
-                    ProjectData.ProjectData.Nodes.Add(tmp);
-                    ProjectData.ProjectData.SelectNode(node);
-                    propertyGrid1.SelectedObject = tmp;
+                    NetworkNode? node = ProjectData.ProjectData.isNodeHitByMouse(e.Location);
+                    if (node != null)
+                    {
+                        ProjectData.ProjectData.activeNode = node;
+                        ProjectData.ProjectData.editorState = EditorState.AddingEdge;
+                    }
                 }
 
             }
@@ -95,18 +120,50 @@ namespace EditorSiete
 
         private void doubleBufferedPanelDrawing_MouseMove(object sender, MouseEventArgs e)
         {
-            NetworkNode? node = ProjectData.ProjectData.selectedNode;
-            if (ProjectData.ProjectData.selectedNode != null && ProjectData.ProjectData.editorState == EditorState.StartDragging)
+            ProjectData.ProjectData.CurrentMousePosition = e.Location;
+
+            if (ProjectData.ProjectData.Mode == EditorMode.EditingNode)
             {
-                node.Position = e.Location;
+                NetworkNode? node = ProjectData.ProjectData.selectedNode;
+                if (ProjectData.ProjectData.selectedNode != null && ProjectData.ProjectData.editorState == EditorState.Dragging)
+                {
+                    node.Position = e.Location;
+                    propertyGrid1.Refresh();
+                }
             }
+            if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge && ProjectData.ProjectData.activeNode != null)
+            {
+                
+            }
+
             doubleBufferedPanelDrawing.Invalidate();
-            propertyGrid1.Refresh();
+            
         }
 
         private void doubleBufferedPanelDrawing_MouseUp(object sender, MouseEventArgs e)
         {
-            ProjectData.ProjectData.editorState = ProjectData.EditorState.None;
+            if (ProjectData.ProjectData.Mode == EditorMode.EditingEdge && ProjectData.ProjectData.activeNode != null)
+            {
+                NetworkNode? node = ProjectData.ProjectData.isNodeHitByMouse(e.Location);
+                if (node != null)
+                {
+                    ProjectData.ProjectData.Edges.Add(new NetworkEdge(ProjectData.ProjectData.activeNode, node));
+                }
+            }
+
+                ProjectData.ProjectData.editorState = ProjectData.EditorState.None;
+        }
+
+        private void nodes_CheckedChanged(object sender, EventArgs e)
+        {
+            ProjectData.ProjectData.Mode = EditorMode.EditingNode;
+            ProjectData.ProjectData.SelectNode(null);
+        }
+
+        private void edges_CheckedChanged(object sender, EventArgs e)
+        {
+            ProjectData.ProjectData.Mode = EditorMode.EditingEdge;
+            ProjectData.ProjectData.SelectNode(null);
         }
     }
 }

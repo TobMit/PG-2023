@@ -38,12 +38,16 @@
             projectToolStripMenuItem = new ToolStripMenuItem();
             loadeImmageToolStripMenuItem = new ToolStripMenuItem();
             panelTools = new Panel();
+            groupBox1 = new GroupBox();
+            edges = new RadioButton();
+            nodes = new RadioButton();
             panelPropertyGrid = new Panel();
             propertyGrid1 = new PropertyGrid();
             checkBoxBackgroundVisible = new CheckBox();
             doubleBufferedPanelDrawing = new Tools.DoubleBufferedPanel();
             menuStrip1.SuspendLayout();
             panelTools.SuspendLayout();
+            groupBox1.SuspendLayout();
             panelPropertyGrid.SuspendLayout();
             SuspendLayout();
             // 
@@ -112,6 +116,7 @@
             // 
             // panelTools
             // 
+            panelTools.Controls.Add(groupBox1);
             panelTools.Controls.Add(panelPropertyGrid);
             panelTools.Controls.Add(checkBoxBackgroundVisible);
             panelTools.Dock = DockStyle.Left;
@@ -120,6 +125,41 @@
             panelTools.Name = "panelTools";
             panelTools.Size = new Size(371, 1417);
             panelTools.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(edges);
+            groupBox1.Controls.Add(nodes);
+            groupBox1.Location = new Point(12, 75);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(338, 194);
+            groupBox1.TabIndex = 2;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "EditorState";
+            // 
+            // edges
+            // 
+            edges.AutoSize = true;
+            edges.Location = new Point(9, 87);
+            edges.Name = "edges";
+            edges.Size = new Size(155, 36);
+            edges.TabIndex = 1;
+            edges.Text = "Edit Edges";
+            edges.UseVisualStyleBackColor = true;
+            edges.CheckedChanged += edges_CheckedChanged;
+            // 
+            // nodes
+            // 
+            nodes.AutoSize = true;
+            nodes.Checked = true;
+            nodes.Location = new Point(13, 39);
+            nodes.Name = "nodes";
+            nodes.Size = new Size(151, 36);
+            nodes.TabIndex = 0;
+            nodes.TabStop = true;
+            nodes.Text = "Edit Node";
+            nodes.UseVisualStyleBackColor = true;
+            nodes.CheckedChanged += nodes_CheckedChanged;
             // 
             // panelPropertyGrid
             // 
@@ -181,6 +221,8 @@
             menuStrip1.PerformLayout();
             panelTools.ResumeLayout(false);
             panelTools.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             panelPropertyGrid.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -202,5 +244,8 @@
         private ToolStripMenuItem loadeImmageToolStripMenuItem;
         private Panel panelPropertyGrid;
         private PropertyGrid propertyGrid1;
+        private GroupBox groupBox1;
+        private RadioButton edges;
+        private RadioButton nodes;
     }
 }
