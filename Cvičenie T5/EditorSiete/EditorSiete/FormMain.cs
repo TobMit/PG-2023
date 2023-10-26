@@ -1,5 +1,6 @@
 using EditorSiete.GraphicalObjects;
 using EditorSiete.Project;
+using EditorSiete.Tools;
 
 namespace EditorSiete
 {
@@ -44,6 +45,11 @@ namespace EditorSiete
                 blackPen.DashPattern = dashValues;
                 g.DrawLine(blackPen, ProjectData.ActiveNode.Position, ProjectData.CurrentMousePosition);
             }
+
+            if( ProjectData.State == EditorState.SelectorTrakcing)
+            {
+                SelectionBox.Draw(g);
+            }
         }
 
         private void doubleBufferedPanelDrawing_MouseDown(object sender, MouseEventArgs e)
@@ -63,7 +69,7 @@ namespace EditorSiete
                         propertyGrid1.SelectedObject = node;
                         ProjectData.State = EditorState.Dragging;
                     }
-                    else
+                    else if (ProjectData.isCtrlPressed )
                     {
                         NetworkNode newNode = new(e.Location);
 
@@ -71,6 +77,11 @@ namespace EditorSiete
                         ProjectData.SelectNode(newNode);
                         newNode.Selected = true;
                         propertyGrid1.SelectedObject = newNode;
+                    }
+                    else
+                    {
+                        SelectionBox.Start = e.Location;
+                        ProjectData.State = EditorState.SelectorTrakcing;
                     }
                 }
                 else if (ProjectData.Mode == EditorMode.EditingEdge)
@@ -102,8 +113,14 @@ namespace EditorSiete
         private void doubleBufferedPanelDrawing_MouseMove(object sender, MouseEventArgs e)
         {
             ProjectData.CurrentMousePosition = e.Location;
+            if(ProjectData.State == EditorState.SelectorTrakcing && SelectionBox.IsActive)
+            {
+                using Region r = SelectionBox.Track(e.Location);
+                doubleBufferedPanelDrawing.Invalidate(r);
+                return;
+            }
 
-            if (ProjectData.Mode == EditorMode.EditingNode)
+            else if (ProjectData.Mode == EditorMode.EditingNode)
             {
 
                 NetworkNode? node = ProjectData.SelectedNode;
@@ -111,13 +128,14 @@ namespace EditorSiete
                 if (node != null && ProjectData.State == EditorState.Dragging)
                 {
                     node.Position = e.Location;
-                    
+
                 }
             }
             else if (ProjectData.Mode == EditorMode.EditingEdge && ProjectData.ActiveNode != null)
             {
 
             }
+            
 
             doubleBufferedPanelDrawing.Invalidate();
         }
@@ -132,6 +150,7 @@ namespace EditorSiete
             }
 
             ProjectData.State = EditorState.None;
+            SelectionBox.IsActive = false;
 
             propertyGrid1.Refresh();
             doubleBufferedPanelDrawing.Invalidate();
@@ -193,7 +212,7 @@ namespace EditorSiete
 
             ProjectData.ProjectPath = saveFileDialog.FileName;
 
-            ProjectData.SaveNetworkData(); 
+            ProjectData.SaveNetworkData();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,6 +231,22 @@ namespace EditorSiete
             ProjectData.LoadNetworkData();
 
             doubleBufferedPanelDrawing.Invalidate();
+        }
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                ProjectData.isCtrlPressed = true;
+            }
+        }
+
+        private void FormMain_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                ProjectData.isCtrlPressed = false;
+            }
         }
     }
 }

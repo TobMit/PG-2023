@@ -8,7 +8,8 @@ namespace EditorSiete.Project
     {
         None,
         Dragging, 
-        AddingEdge
+        AddingEdge, 
+        SelectorTrakcing
     }
 
     public enum EditorMode
@@ -30,6 +31,8 @@ namespace EditorSiete.Project
  
         public static EditorState State = EditorState.None;
         public static EditorMode Mode = EditorMode.EditingNode;
+
+        public static bool isCtrlPressed;
 
         static ProjectData()
         {
