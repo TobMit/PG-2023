@@ -63,6 +63,8 @@ namespace EditorSiete.GraphicalObjects
             }
         }
 
+
+
         public NetworkNode()
         {
             Name = string.Empty;

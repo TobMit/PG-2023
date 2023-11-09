@@ -62,6 +62,7 @@ namespace EditorSiete
         private void doubleBufferedPanelDrawing_MouseDown(object sender, MouseEventArgs e)
         {
             ProjectData.CurrentMousePosition = e.Location;
+            ProjectData.StartMousePosition = e.Location;
 
             if (e.Button == MouseButtons.Left)
             {
@@ -72,7 +73,10 @@ namespace EditorSiete
                     // zistime ci sme klikli na nejaky uzol
                     if (node != null)
                     {
-                        ProjectData.SelectNode(node);
+                        if (!ProjectData.SelectedNodes.Contains(node))
+                        {
+                            ProjectData.SelectNode(node);
+                        }
                         propertyGrid1.SelectedObject = node;
                         ProjectData.State = EditorState.Dragging;
                     }
@@ -131,11 +135,19 @@ namespace EditorSiete
             if (ProjectData.Mode == EditorMode.EditingNode)
             {
 
-                NetworkNode? node = ProjectData.SelectedNode;
+                var node = ProjectData.SelectedNodes;
 
-                if (node != null && ProjectData.State == EditorState.Dragging)
+                if (node.Count >= 0 && ProjectData.State == EditorState.Dragging)
                 {
-                    node.Position = e.Location;
+                    var displacement = new Point(ProjectData.CurrentMousePosition.X - ProjectData.StartMousePosition.X,
+                        ProjectData.CurrentMousePosition.Y - ProjectData.StartMousePosition.Y);
+                    foreach (var selectedNode in node)
+                    {
+                        selectedNode.Position = new(selectedNode.Position.X + displacement.X,
+                                                        selectedNode.Position.Y + displacement.Y);
+                    }
+
+                    ProjectData.StartMousePosition = ProjectData.CurrentMousePosition;
                 }
             }
             else if (ProjectData.Mode == EditorMode.EditingEdge && ProjectData.ActiveNode != null)

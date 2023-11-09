@@ -20,9 +20,10 @@ namespace EditorSiete.Project
 
     public static class ProjectData
     {
-        public static NetworkNode? SelectedNode;
+        public static List<NetworkNode> SelectedNodes;
         public static NetworkNode? ActiveNode;
         public static Point CurrentMousePosition;
+        public static Point StartMousePosition;
         public static bool BackgroundVisible = true;
         public static string BitmapPath = string.Empty;
         public static string ProjectPath = string.Empty;
@@ -42,7 +43,7 @@ namespace EditorSiete.Project
         public static void ResetProjectData()
         {
             NetworkData = new();
-            SelectedNode = null;
+            SelectedNodes = new();
             ActiveNode = null;
             BackgroundVisible = true;
             BitmapPath = string.Empty;
@@ -108,19 +109,19 @@ namespace EditorSiete.Project
         public static void SelectNode(NetworkNode? node)
         {
             NetworkData.Nodes.ForEach(x => x.Selected = false);
-            SelectedNode = null; 
+            SelectedNodes.Clear(); 
 
             if (node != null)
             {
                 node.Selected = true;
-                SelectedNode = node;
+                SelectedNodes.Add(node);
             }
         }
 
         public static void SelectNode(Rectangle rectangle)
         {
             NetworkData.Nodes.ForEach(x => x.Selected = false);
-            SelectedNode = null;
+            SelectedNodes.Clear();
 
             if (rectangle.IsEmpty)
             {
@@ -132,7 +133,7 @@ namespace EditorSiete.Project
                 if (rectangle.Contains(node.Position))
                 {
                     node.Selected = true;
-                    SelectedNode = node;
+                    SelectedNodes.Add(node);
                 }
             }
             
