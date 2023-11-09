@@ -53,10 +53,12 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.ImageScalingSize = new Size(32, 32);
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, projectToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1190, 24);
+            menuStrip1.Padding = new Padding(11, 4, 0, 4);
+            menuStrip1.Size = new Size(2210, 44);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -64,39 +66,39 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newProjectToolStripMenuItem, openToolStripMenuItem, closeToolStripMenuItem, saveToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Size = new Size(71, 36);
             fileToolStripMenuItem.Text = "File";
             // 
             // newProjectToolStripMenuItem
             // 
             newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            newProjectToolStripMenuItem.Size = new Size(103, 22);
+            newProjectToolStripMenuItem.Size = new Size(206, 44);
             newProjectToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(103, 22);
+            openToolStripMenuItem.Size = new Size(206, 44);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // closeToolStripMenuItem
             // 
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            closeToolStripMenuItem.Size = new Size(103, 22);
+            closeToolStripMenuItem.Size = new Size(206, 44);
             closeToolStripMenuItem.Text = "Close";
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(103, 22);
+            saveToolStripMenuItem.Size = new Size(206, 44);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(103, 22);
+            exitToolStripMenuItem.Size = new Size(206, 44);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -104,14 +106,15 @@
             // 
             projectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadBackgroundImageToolStripMenuItem });
             projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            projectToolStripMenuItem.Size = new Size(56, 20);
+            projectToolStripMenuItem.Size = new Size(107, 36);
             projectToolStripMenuItem.Text = "Project";
             // 
             // loadBackgroundImageToolStripMenuItem
             // 
             loadBackgroundImageToolStripMenuItem.Name = "loadBackgroundImageToolStripMenuItem";
-            loadBackgroundImageToolStripMenuItem.Size = new Size(203, 22);
+            loadBackgroundImageToolStripMenuItem.Size = new Size(405, 44);
             loadBackgroundImageToolStripMenuItem.Text = "Load background image";
+            loadBackgroundImageToolStripMenuItem.Click += loadBackgroundImageToolStripMenuItem_Click;
             // 
             // panelTools
             // 
@@ -119,18 +122,21 @@
             panelTools.Controls.Add(panelPropertyGrid);
             panelTools.Controls.Add(checkBoxBackgroundVisible);
             panelTools.Dock = DockStyle.Left;
-            panelTools.Location = new Point(0, 24);
+            panelTools.Location = new Point(0, 44);
+            panelTools.Margin = new Padding(6);
             panelTools.Name = "panelTools";
-            panelTools.Size = new Size(206, 661);
+            panelTools.Size = new Size(383, 1417);
             panelTools.TabIndex = 1;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(radioButtonEdges);
             groupBox1.Controls.Add(radioButtonNodes);
-            groupBox1.Location = new Point(12, 39);
+            groupBox1.Location = new Point(22, 83);
+            groupBox1.Margin = new Padding(6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(182, 78);
+            groupBox1.Padding = new Padding(6);
+            groupBox1.Size = new Size(338, 166);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Editor state";
@@ -138,9 +144,10 @@
             // radioButtonEdges
             // 
             radioButtonEdges.AutoSize = true;
-            radioButtonEdges.Location = new Point(9, 51);
+            radioButtonEdges.Location = new Point(17, 109);
+            radioButtonEdges.Margin = new Padding(6);
             radioButtonEdges.Name = "radioButtonEdges";
-            radioButtonEdges.Size = new Size(79, 19);
+            radioButtonEdges.Size = new Size(156, 36);
             radioButtonEdges.TabIndex = 1;
             radioButtonEdges.TabStop = true;
             radioButtonEdges.Text = "Edit edges";
@@ -151,9 +158,10 @@
             // 
             radioButtonNodes.AutoSize = true;
             radioButtonNodes.Checked = true;
-            radioButtonNodes.Location = new Point(9, 26);
+            radioButtonNodes.Location = new Point(17, 55);
+            radioButtonNodes.Margin = new Padding(6);
             radioButtonNodes.Name = "radioButtonNodes";
-            radioButtonNodes.Size = new Size(80, 19);
+            radioButtonNodes.Size = new Size(157, 36);
             radioButtonNodes.TabIndex = 0;
             radioButtonNodes.TabStop = true;
             radioButtonNodes.Text = "Edit nodes";
@@ -164,38 +172,41 @@
             // 
             panelPropertyGrid.Controls.Add(propertyGrid1);
             panelPropertyGrid.Dock = DockStyle.Bottom;
-            panelPropertyGrid.Location = new Point(0, 335);
+            panelPropertyGrid.Location = new Point(0, 722);
+            panelPropertyGrid.Margin = new Padding(6);
             panelPropertyGrid.Name = "panelPropertyGrid";
-            panelPropertyGrid.Size = new Size(206, 326);
+            panelPropertyGrid.Size = new Size(383, 695);
             panelPropertyGrid.TabIndex = 1;
             // 
             // propertyGrid1
             // 
             propertyGrid1.Dock = DockStyle.Fill;
             propertyGrid1.Location = new Point(0, 0);
+            propertyGrid1.Margin = new Padding(6);
             propertyGrid1.Name = "propertyGrid1";
-            propertyGrid1.Size = new Size(206, 326);
+            propertyGrid1.Size = new Size(383, 695);
             propertyGrid1.TabIndex = 0;
             // 
             // checkBoxBackgroundVisible
             // 
             checkBoxBackgroundVisible.AutoSize = true;
-            checkBoxBackgroundVisible.Checked = true;
-            checkBoxBackgroundVisible.CheckState = CheckState.Checked;
-            checkBoxBackgroundVisible.Location = new Point(21, 14);
+            checkBoxBackgroundVisible.Location = new Point(39, 30);
+            checkBoxBackgroundVisible.Margin = new Padding(6);
             checkBoxBackgroundVisible.Name = "checkBoxBackgroundVisible";
-            checkBoxBackgroundVisible.Size = new Size(127, 19);
+            checkBoxBackgroundVisible.Size = new Size(250, 36);
             checkBoxBackgroundVisible.TabIndex = 0;
             checkBoxBackgroundVisible.Text = "Visible background";
             checkBoxBackgroundVisible.UseVisualStyleBackColor = true;
+            checkBoxBackgroundVisible.Click += checkBoxBackgroundVisible_CheckedChanged;
             // 
             // doubleBufferedPanelDrawing
             // 
             doubleBufferedPanelDrawing.BackColor = Color.White;
             doubleBufferedPanelDrawing.Dock = DockStyle.Fill;
-            doubleBufferedPanelDrawing.Location = new Point(206, 24);
+            doubleBufferedPanelDrawing.Location = new Point(383, 44);
+            doubleBufferedPanelDrawing.Margin = new Padding(6);
             doubleBufferedPanelDrawing.Name = "doubleBufferedPanelDrawing";
-            doubleBufferedPanelDrawing.Size = new Size(984, 661);
+            doubleBufferedPanelDrawing.Size = new Size(1827, 1417);
             doubleBufferedPanelDrawing.TabIndex = 2;
             doubleBufferedPanelDrawing.Paint += doubleBufferedPanelDrawing_Paint;
             doubleBufferedPanelDrawing.MouseDown += doubleBufferedPanelDrawing_MouseDown;
@@ -204,14 +215,15 @@
             // 
             // FormMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1190, 685);
+            ClientSize = new Size(2210, 1461);
             Controls.Add(doubleBufferedPanelDrawing);
             Controls.Add(panelTools);
             Controls.Add(menuStrip1);
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(6);
             Name = "FormMain";
             Text = "Editor siete";
             KeyDown += FormMain_KeyDown;
