@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Windows.Forms.VisualStyles;
 using System.Xml;
+using EditorSiete.Tools;
 
 namespace EditorSiete.Project
 {
@@ -64,6 +65,16 @@ namespace EditorSiete.Project
                 Bitmap?.Dispose();
 
                 Bitmap = new Bitmap(BitmapPath);
+
+                CoordTransformations.Umin = 0;
+                CoordTransformations.Vmax = 0;
+                CoordTransformations.Xmin = Bitmap.Width;
+                CoordTransformations.Vmin = Bitmap.Height;
+
+                CoordTransformations.Xmin = -17000.0f;
+                CoordTransformations.Xmax = 16000.0f;
+                CoordTransformations.Ymin = -9600.0f;
+                CoordTransformations.Ymax = 7100.0f;
                 return true;
             }
             catch (Exception e)

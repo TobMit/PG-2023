@@ -1,6 +1,7 @@
 ﻿using EditorSiete.Interfaces;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using EditorSiete.Tools;
 
 namespace EditorSiete.GraphicalObjects
 {
@@ -24,6 +25,8 @@ namespace EditorSiete.GraphicalObjects
             set { selected = value; }
         }
 
+        public PointF PositionWorld { get; set; }
+
         [DataMember()]
         public string Name { get; set; }
 
@@ -39,6 +42,7 @@ namespace EditorSiete.GraphicalObjects
             set
             {
                 position = value;
+                PositionWorld = CoordTransformations.FromUVtoXY(position);
             }
         }
 
