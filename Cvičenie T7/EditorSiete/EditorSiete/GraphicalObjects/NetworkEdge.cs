@@ -14,7 +14,17 @@ namespace EditorSiete.GraphicalObjects
         private NetworkNode? startNode;
         [DataMember()]
         private int endNodeId;
-        
+
+        public NetworkNode? StartNode
+        {
+            get => startNode;
+        }
+
+        public NetworkNode? EndNode
+        {
+            get => endNode;
+        }
+
         public int StartNodeId { get => startNodeId; set => startNodeId = value ; }
 
         public int EndNodeId { get => endNodeId; set => endNodeId = value; }

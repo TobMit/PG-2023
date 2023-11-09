@@ -1,5 +1,6 @@
 ﻿using EditorSiete.GraphicalObjects;
 using System.Runtime.Serialization;
+using System.Windows.Forms.VisualStyles;
 using System.Xml;
 
 namespace EditorSiete.Project
@@ -96,6 +97,16 @@ namespace EditorSiete.Project
 
         public static void DeleteNode(NetworkNode? node)
         {
+            for (int i = 0; i < NetworkData.Edges.Count; i++)
+            {
+                var edge = NetworkData.Edges[i];
+                if (edge.StartNode == node || edge.EndNode == node)
+                {
+                    NetworkData.Edges.RemoveAt(i);
+                    i--;
+                }
+            }
+
             if (node != null)
                 NetworkData.Nodes.Remove(node);
         }
