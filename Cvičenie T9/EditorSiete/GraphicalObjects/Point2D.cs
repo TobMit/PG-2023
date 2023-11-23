@@ -149,6 +149,7 @@ namespace EditorSiete.GraphicalObjects
                 g.FillRectangle(brush, drawAt.X + 1, drawAt.Y, 1, 1);
                 g.FillRectangle(brush, drawAt.X, drawAt.Y + 1, 1, 1);
                 g.FillRectangle(brush, drawAt.X + 1, drawAt.Y + 1, 1, 1);
+                // how to f you no
             }
         }
     }
