@@ -77,6 +77,10 @@ namespace EditorSiete
                 point.Draw(g);
             }
 
+            Abscissa2D ciara = new Abscissa2D();
+            ciara.PointStart = new PointF(0, 0);
+            ciara.PointEnd = new PointF(100, -200);
+            ciara.Draw(g);
 
             //// vykreslenie mapoveho podkladu
             //if (ProjectData.NetworkData.BackgroundVisible && ProjectData.Bitmap != null)
