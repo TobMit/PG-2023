@@ -36,5 +36,15 @@ namespace EditorSiete.Tools
         {
             return new Matrix(new float[,] { { p.X / (float)Umax * Xmax }, { Ymax - (p.Y / (float)Vmax * Ymax) }, { 1 } });
         }
+
+        /// <summary>
+        /// GetUVF
+        /// </summary>
+        public static PointF GetUVF(Matrix v)
+        {
+            if ((v == null) || (v.Rows != 3 || v.Columns != 1))
+                throw new ApplicationException($"Wrong vertex data input!");
+            return new PointF(v[0, 0] / Xmax * Umax, Vmax - (v[1, 0] / Ymax * Vmax));
+        }
     }
 }

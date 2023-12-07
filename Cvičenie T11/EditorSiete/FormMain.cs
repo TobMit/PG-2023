@@ -3,6 +3,7 @@ using EditorSiete.GraphicalObjects;
 using EditorSiete.Project;
 using EditorSiete.Tools;
 using System.Diagnostics;
+using UNIZA.FRI.MatrixVectorMath;
 
 namespace EditorSiete
 {
@@ -10,6 +11,7 @@ namespace EditorSiete
     {
         private List<Point2D> points;
         private List<Abscissa2D> lines;
+        BesierCubicCurve besierCubic;
 
         public FormMain()
         {
@@ -77,6 +79,12 @@ namespace EditorSiete
                      )
                 );
             }
+
+            besierCubic = new BesierCubicCurve();
+            besierCubic.Add(new Matrix(new float[,] {{10, 10, 1}}, true));
+            besierCubic.Add(new Matrix(new float[,] { { 50, 100, 1 } }, true));
+            besierCubic.Add(new Matrix(new float[,] { { -50, 120, 1 } }, true));
+            besierCubic.Add(new Matrix(new float[,] { { 200, 200, 1 } }, true));
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,6 +107,8 @@ namespace EditorSiete
             {
                 line.Draw(g);
             }
+
+            besierCubic.Draw(g);
 
 
             //// vykreslenie mapoveho podkladu
