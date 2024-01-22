@@ -7,6 +7,7 @@ namespace FriBird
     public partial class Form1 : Form
     {
         private BackGround backGround;
+        private Bird bird;
 
         private List<Prekazky> prekazyList;
         private Random random;
@@ -15,6 +16,7 @@ namespace FriBird
         {
             InitializeComponent();
             backGround = new BackGround();
+            bird = new();
             prekazyList = new(2);
             random = new();
 
@@ -35,7 +37,7 @@ namespace FriBird
             {
                 prekazky.Draw(g);
             }
-
+            bird.Draw(g);
             backGround.DrawGround(g);
         }
 

@@ -23,6 +23,10 @@ namespace FriBird.Tool
          * Určuje šírku medzi prekážkami v y osi
          */
         public static readonly int VYSKA_MEDZI_PREKAZKAMI = 140; //140
+
+        public static readonly int POHYB = 10;
+
+        public static readonly float ROTATION_SPEED = 2.5f;
     }
 
 }
