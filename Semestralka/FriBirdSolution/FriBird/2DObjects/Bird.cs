@@ -16,6 +16,7 @@ namespace FriBird._2DObjects
 
         private Bitmap image;
         float degree = 0;
+        private int birdVelocity = 0;
 
         public Bird()
         {
@@ -39,6 +40,8 @@ namespace FriBird._2DObjects
             float centerX = image.Width / 2f;
             float centerY = image.Height / 2f;
 
+            PoziciaY += birdVelocity;
+
             // Set the rotation point at the center of the image
             g.TranslateTransform(PoziciaX + centerX, PoziciaY + centerY);
 
@@ -57,9 +60,16 @@ namespace FriBird._2DObjects
             degree += Constants.ROTATION_SPEED;
         }
 
-        public void Move(int posun)
+        public void GravitaciaPosun()
         {
-            PoziciaY += posun;
+            birdVelocity += Constants.POHYB;
+        }
+
+        public void Jump()
+        {
+            birdVelocity -= 20 * Constants.POHYB;
+            //PoziciaY -= 4 * Constants.POHYB; -- pri starte
+            
         }
     }
 }

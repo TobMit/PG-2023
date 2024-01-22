@@ -23,6 +23,9 @@ namespace FriBird
             GenerujPrekazky();
 
             timer1.Start();
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+
         }
 
 
@@ -67,6 +70,17 @@ namespace FriBird
             if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 0)
             {
                 GenerujPrekazky();
+            }
+
+            bird.GravitaciaPosun();
+        }
+
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                bird.Jump();
             }
         }
     }

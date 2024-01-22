@@ -24,7 +24,7 @@ namespace FriBird.Tool
          */
         public static readonly int VYSKA_MEDZI_PREKAZKAMI = 140; //140
 
-        public static readonly int POHYB = 10;
+        public static readonly int POHYB = 1;
 
         public static readonly float ROTATION_SPEED = 2.5f;
     }
