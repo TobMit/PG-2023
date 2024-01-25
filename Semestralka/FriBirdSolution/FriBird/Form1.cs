@@ -12,6 +12,8 @@ namespace FriBird
         private List<Prekazky> prekazyList;
         private Random random;
 
+        private bool run = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -62,17 +64,20 @@ namespace FriBird
 
         private void Tick()
         {
-            foreach (var prekazky in prekazyList)
+            if (run)
             {
-                prekazky.Move();
+                foreach (var prekazky in prekazyList)
+                {
+                    prekazky.Move();
+                }
+
+                bird.GravitaciaPosun();
             }
 
             if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 0)
             {
                 GenerujPrekazky();
             }
-
-            bird.GravitaciaPosun();
         }
 
 
@@ -80,6 +85,10 @@ namespace FriBird
         {
             if (e.KeyCode == Keys.Space)
             {
+                if (!run)
+                {
+                    run = true;
+                }
                 bird.Jump();
             }
         }
