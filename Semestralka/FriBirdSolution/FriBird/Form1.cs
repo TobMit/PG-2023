@@ -12,7 +12,8 @@ namespace FriBird
         private List<Prekazky> prekazyList;
         private Random random;
 
-        private bool run = false;
+
+        private GameStat stat;
 
         public Form1()
         {
@@ -27,6 +28,8 @@ namespace FriBird
             timer1.Start();
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+
+            stat = GameStat.Start;
 
         }
 
@@ -48,7 +51,6 @@ namespace FriBird
 
         private void GenerujPrekazky()
         {
-            prekazyList.Clear();
             var spodnaHranaHornejPrekazky = random.Next(3, 250);
             prekazyList.Add(new(false, spodnaHranaHornejPrekazky));
             prekazyList.Add(new(true, spodnaHranaHornejPrekazky));
@@ -65,7 +67,7 @@ namespace FriBird
         private void Tick()
         {
             bool colidet = false;
-            if (run)
+            if (stat == GameStat.Run)
             {
                 foreach (var prekazky in prekazyList)
                 {
@@ -77,17 +79,33 @@ namespace FriBird
                 colidet |= bird.PoziciaY + Constants.SIZE_OF_BIRD > 350; // kolizia s dolnou hranou
 
                 bird.GravitaciaPosun();
+
+                if (colidet)
+                {
+                    stat = GameStat.Lose;
+                    bird.Run = false;
+                }
+            }
+
+            if (prekazyList.Count > 2) // aby sa porovnávalo podla správnej prekazky èiže ak sú nové prekážky pred birdom ale staré sú ešte na ploche
+            {
+                if (prekazyList[3].PoziciaX + Constants.SIRKA_PREKAZKY < 80)
+                {
+                    GenerujPrekazky();
+                }
+            }
+            else
+            {
+                if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 80)
+                {
+                    GenerujPrekazky();
+                }
             }
 
             if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 0)
             {
-                GenerujPrekazky();
-            }
-
-            if (colidet)
-            {
-                run = false;
-                bird.Run = run;
+                prekazyList.RemoveAt(0);
+                prekazyList.RemoveAt(0);
             }
         }
 
@@ -96,12 +114,29 @@ namespace FriBird
         {
             if (e.KeyCode == Keys.Space)
             {
-                if (!run)
+                if (stat == GameStat.Start)
                 {
-                    run = true;
-                    bird.Run = run;
+                    bird.Run = true;
+                    stat = GameStat.Run;
+                    bird.Jump();
                 }
-                bird.Jump();
+                else if (stat == GameStat.Run)
+                {
+                    bird.Jump();
+                }
+                else
+                {
+                    
+                    bird = new();
+                    prekazyList.Clear();
+                    GenerujPrekazky();
+                    stat = GameStat.Start;
+                }
+                
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
             }
         }
     }

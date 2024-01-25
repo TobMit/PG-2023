@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace FriBird.Tool
 {
+    public enum GameStat
+    {
+        Start,
+        Run,
+        Lose,
+    }
+
     public class Constants
     {
         public static readonly string BASE_IMAGE_DIR = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Images";
