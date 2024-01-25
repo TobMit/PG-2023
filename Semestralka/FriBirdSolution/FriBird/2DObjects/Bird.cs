@@ -14,6 +14,8 @@ namespace FriBird._2DObjects
         public int PoziciaX { get; set; }
         public int PoziciaY { get; set; }
 
+        public bool Run { get; set; }
+
         private Bitmap image;
         float degree = 0;
         private int birdVelocity = 0;
@@ -24,6 +26,8 @@ namespace FriBird._2DObjects
             PoziciaX = 150-25; // lavý horný bod obrázka
 
             image = new Bitmap(Constants.BASE_IMAGE_DIR + "\\Birds\\FriBird\\2-1.png");
+
+            Run = false;
         }
 
         public void Draw(Graphics g)
@@ -40,24 +44,31 @@ namespace FriBird._2DObjects
             float centerX = image.Width / 2f;
             float centerY = image.Height / 2f;
 
-            PoziciaY += birdVelocity;
+            if (Run)
+            {
+                PoziciaY += birdVelocity;
+            }
 
             // Set the rotation point at the center of the image
+            //PoziciaX += centerX;
+            //PoziciaY += centerY;
             g.TranslateTransform(PoziciaX + centerX, PoziciaY + centerY);
 
             // Rotate the image
             g.RotateTransform(degree);
 
             // Draw the rotated image
-            g.DrawImage(image, -centerX, -centerY, 51, 51);
+            g.DrawImage(image, -centerX, -centerY, Constants.SIZE_OF_BIRD, Constants.SIZE_OF_BIRD);
 
             // Reset the transformation matrix for future drawings
             g.ResetTransform();
 
             //g.FillRectangle(Brushes.Red, PoziciaX, PoziciaY, 5,5);
 
-
-            degree += Constants.ROTATION_SPEED;
+            if (Run)
+            {
+                degree += Constants.ROTATION_SPEED;
+            }
         }
 
         public void GravitaciaPosun()
@@ -67,6 +78,7 @@ namespace FriBird._2DObjects
 
         public void Jump()
         {
+            // pre lepšie skákanie
             if (birdVelocity < 0)
             {
                 birdVelocity -= 15 * Constants.POHYB;

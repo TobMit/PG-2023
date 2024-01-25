@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FriBird.Interface;
 using FriBird.Tool;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace FriBird._2DObjects
 {
@@ -37,6 +38,13 @@ namespace FriBird._2DObjects
         public void Move()
         {
             this.PoziciaX -= Constants.POHYB_PREKAZKY;
+        }
+
+        public bool IsColiding(Bird bird)
+        {
+            Rectangle rec = new(PoziciaX, PoziciaY, Constants.SIRKA_PREKAZKY, Constants.DLZKA_PREKAZKY);
+            Rectangle recBird = new(bird.PoziciaX, bird.PoziciaY, Constants.SIZE_OF_BIRD, Constants.SIZE_OF_BIRD);
+            return rec.IntersectsWith(recBird);
         }
     }
 }

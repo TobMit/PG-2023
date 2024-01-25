@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -27,6 +28,8 @@ namespace FriBird.Tool
         public static readonly int POHYB = 1;
 
         public static readonly float ROTATION_SPEED = 2.5f;
+
+        public static readonly int SIZE_OF_BIRD = 51;
     }
 
 }

@@ -64,12 +64,17 @@ namespace FriBird
 
         private void Tick()
         {
+            bool colidet = false;
             if (run)
             {
                 foreach (var prekazky in prekazyList)
                 {
                     prekazky.Move();
+                    colidet |= prekazky.IsColiding(bird);
                 }
+
+                colidet |= bird.PoziciaY < 0; // kolizia s hornou hranou
+                colidet |= bird.PoziciaY + Constants.SIZE_OF_BIRD > 350; // kolizia s dolnou hranou
 
                 bird.GravitaciaPosun();
             }
@@ -77,6 +82,12 @@ namespace FriBird
             if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 0)
             {
                 GenerujPrekazky();
+            }
+
+            if (colidet)
+            {
+                run = false;
+                bird.Run = run;
             }
         }
 
@@ -88,6 +99,7 @@ namespace FriBird
                 if (!run)
                 {
                     run = true;
+                    bird.Run = run;
                 }
                 bird.Jump();
             }
