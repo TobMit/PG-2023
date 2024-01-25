@@ -67,7 +67,14 @@ namespace FriBird._2DObjects
 
         public void Jump()
         {
-            birdVelocity -= 20 * Constants.POHYB;
+            if (birdVelocity < 0)
+            {
+                birdVelocity -= 15 * Constants.POHYB;
+            }
+            else
+            {
+                birdVelocity = -10 * Constants.POHYB;
+            }
             //PoziciaY -= 4 * Constants.POHYB; -- pri starte
             
         }
