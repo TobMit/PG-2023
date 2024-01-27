@@ -8,12 +8,14 @@ namespace FriBird
     {
         private BackGround backGround;
         private Bird bird;
+        private CiselnyDisplay scoreDisplay;
 
         private List<Prekazky> prekazyList;
         private Random random;
 
 
         private GameStat stat;
+        private int score;
 
         public Form1()
         {
@@ -22,6 +24,8 @@ namespace FriBird
             bird = new();
             prekazyList = new(2);
             random = new();
+            scoreDisplay = new();
+            scoreDisplay.Pozicia = new(150, 425);
 
             GenerujPrekazky();
 
@@ -30,6 +34,7 @@ namespace FriBird
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
 
             stat = GameStat.Start;
+            score = 0;
 
         }
 
@@ -47,6 +52,8 @@ namespace FriBird
             }
             bird.Draw(g);
             backGround.DrawGround(g);
+            scoreDisplay.Draw(g);
+
         }
 
         private void GenerujPrekazky()
@@ -107,6 +114,12 @@ namespace FriBird
                 prekazyList.RemoveAt(0);
                 prekazyList.RemoveAt(0);
             }
+
+            if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 151)
+            {
+                score++;
+                scoreDisplay.ZobrazovaneCislo = score;
+            }
         }
 
 
@@ -131,6 +144,7 @@ namespace FriBird
                     prekazyList.Clear();
                     GenerujPrekazky();
                     stat = GameStat.Start;
+                    scoreDisplay.ZobrazovaneCislo = 0;
                 }
                 
             }
