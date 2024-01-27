@@ -58,7 +58,7 @@ namespace FriBird
 
         private void GenerujPrekazky()
         {
-            var spodnaHranaHornejPrekazky = random.Next(3, 250);
+            var spodnaHranaHornejPrekazky = random.Next(3, 240);
             prekazyList.Add(new(false, spodnaHranaHornejPrekazky));
             prekazyList.Add(new(true, spodnaHranaHornejPrekazky));
         }
@@ -115,7 +115,7 @@ namespace FriBird
                 prekazyList.RemoveAt(0);
             }
 
-            if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 151)
+            if (prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY < 151 && prekazyList[0].PoziciaX + Constants.SIRKA_PREKAZKY >= 150)
             {
                 score++;
                 scoreDisplay.ZobrazovaneCislo = score;
@@ -145,6 +145,7 @@ namespace FriBird
                     GenerujPrekazky();
                     stat = GameStat.Start;
                     scoreDisplay.ZobrazovaneCislo = 0;
+                    score = 0;
                 }
                 
             }
