@@ -62,7 +62,7 @@ namespace FriBird
             prekazyList.Add(new(false, spodnaHranaHornejPrekazky));
             prekazyList.Add(new(true, spodnaHranaHornejPrekazky));
         }
-        
+
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
@@ -139,7 +139,7 @@ namespace FriBird
                 }
                 else
                 {
-                    
+
                     bird = new();
                     prekazyList.Clear();
                     GenerujPrekazky();
@@ -147,7 +147,7 @@ namespace FriBird
                     scoreDisplay.ZobrazovaneCislo = 0;
                     score = 0;
                 }
-                
+
             }
             else if (e.KeyCode == Keys.Escape)
             {
