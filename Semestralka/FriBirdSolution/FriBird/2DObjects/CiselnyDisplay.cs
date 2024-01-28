@@ -60,7 +60,7 @@ namespace FriBird._2DObjects
                 jednotky.Draw(g);
             }
 
-            g.FillRectangle(Brushes.Blue, Pozicia.X, Pozicia.Y, 5, 5);
+            //g.FillRectangle(Brushes.Blue, Pozicia.X, Pozicia.Y, 5, 5);
         }
     }
 }
